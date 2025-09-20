@@ -1,0 +1,51 @@
+seed: 42
+
+paths:
+  data_dir: data
+  train_csv: data/train_trips.csv
+  test_csv: data/test_trips.csv
+  artifacts_dir: artifacts  # scenario/run-tag aware
+
+simulation:
+
+  n_train_trips: 96
+  n_test_trips: 24
+  sample_period_s: 1
+  min_trip_min: 25
+  max_trip_min: 60
+  base_speed_kmh: 60
+  speed_std_kmh: 8
+  flow_lpm_delivery: 120       # میانگین دبی تحویل
+  flow_lpm_theft: [10, 90]     # به‌جای عدد ثابت، بازه برای سرقت (اختیاری؛ می‌تواند عدد هم باشد)
+  theft_prob: 0.30
+  delivery_prob: 0.85
+  leak_prob: 0.10
+  small_leak_lpm: [5, 8]
+  fuel_capacity_l: 15000
+  fuel_start_ratio: [0.6, 0.95]
+  fuel_gauge_noise_l: 6
+  gps_noise_m: 5
+  min_stop_s: 30
+  max_stop_s: 120
+  depot_zone_ratio: 0.1
+
+  # --- جدید برای نرخ رویدادها (پایه بر دقیقه) ---
+  lambda_delivery_per_min: 0.8   # نرخ پایه رخداد تحویل در دقیقه (ضرب می‌شود در delivery_prob)
+  lambda_theft_per_min: 0.3      # نرخ پایه رخداد سرقت در دقیقه (ضرب می‌شود در theft_prob)
+
+  # --- تنوع دبی تحویل ---
+  flow_delivery_std: 20.0         # انحراف معیار نرمال برای دبی تحویل
+
+  # --- منطق سرقت: در سرعت کم/ایستاده هم مجاز ---
+  theft_max_speed_kmh: 3.0     # اگر speed <= این مقدار باشد، امکان سرقت هست
+  theft_min_stop_s: 0.0           # شرط حداقل توقف برای مجاز بودن سرقت (۰ یعنی لازم نیست)
+
+  # --- اسلاشینگ سطح سوخت (نویز همبسته زمانی) ---
+  sloshing_rho: 0.90              # ضریب AR(1) برای میرایی موج
+  sloshing_sigma_l: 1.5           # نویز پایه اسلاشینگ (لیتر)
+  sloshing_acc_gain_l: 2.0        # حساسیت به شتاب (با tanh(a) تزریق می‌شود)
+
+windowing:
+  window_sec: 60
+  stride_sec: 10
+  feat_cols: ["geofence_status","speed_kmh","flow_lpm","fuel_l","fuel_change_rate_lpm","stop_duration_s"]
