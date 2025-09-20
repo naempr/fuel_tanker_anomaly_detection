@@ -117,3 +117,22 @@ PYTHONPATH=. python train/collect_runs.py \
 ```bash
 PYTHONPATH=. python train/post_eval_metrics.py --run_dir artifacts/baseline/<run_tag>
 ```
+
+---
+
+## Citation & Contact
+
+If you use this repository or the accompanying paper, **please cite**:
+
+```bibtex
+@inproceedings{mpr2025_anomaly_tanker,
+  title     = {Anomaly Detection in Road-Tanker Fuel Transport: A Deep Learning and Simulation Study},
+  author    = {Naemeh Mohammadpour},
+  booktitle = {<oil.bcnf>},
+  year      = {2025},
+  url       = {[https://github.com/<org-or-user>/<repo>](https://github.com/naempr/fuel_tanker_anomaly_detection)}
+}
+```
+
+For questions or collaboration, contact: [naemeh.mpr@aut.ac.ir](mailto:naemeh.mpr@aut.ac.ir).
+Please include a link back to this repository when using the code or results.
